@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+///// _mixins.scss
+
+@mixin display-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+///// _mixins.scss
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.profile-cards {
+    @include display-flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 30px;
+
+    .card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        height: 400px;
+
+        position: relative;
+
+        // color: #00409f;
+        // background-color: #cbffce70;
+        letter-spacing: 1px;
+
+        // border: 25px solid #a0cdcf;
+        border-radius: 25px;
+
+        overflow: hidden;
+
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+
+        .card-description {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            padding: 40px;
+
+            width: auto;
+            height: 100%;
+
+            .card-description-title {
+                color: black;
+
+                font-size: 18px;
+            }
+
+            .card-description-profession {
+                display: block;
+
+                font-size: 16px;
+            }
+
+            .card-description-company {
+                display: block;
+
+                font-size: 14px;
+
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .card-description-social {
+                position: absolute;
+                bottom: 40px;
+
+                .card-description-social-follow {
+                    display: block;
+
+                    margin-bottom: 8px;
+
+                    // color: #555572;
+                    font-size: 14px;
+                }
+
+                ul {
+                    @include display-flex;
+                    gap: 10px;
+
+                    li {
+                        list-style-type: none;
+
+                        a {
+                            @include display-flex;
+                            width: 40px;
+                            height: 40px;
+                            color: #121212;
+                            border-radius: 50%;
+                            box-shadow:
+                                6px 6px 12px #97c3c4,
+                                -6px -6px 12px #cdffff;
+
+                            transition: all 0.4s;
+
+                            &:hover {
+                                color: white;
+
+                                transform: translate(0, -7px);
+                            }
+
+                            svg {
+                                width: calc(100% - 15px);
+                                height: calc(100% - 15px);
+                            }
+                        }
+                    }
+
+                    li:nth-child(1) {
+                        a {
+                            &:hover {
+                                background-color: #0dff00;
+                            }
+                        }
+                    }
+
+                    li:nth-child(2) {
+                        a {
+                            &:hover {
+                                background-color: #00ff11;
+                            }
+                        }
+                    }
+
+                    li:nth-child(3) {
+                        a {
+                            &:hover {
+                                background-color: #00ff11;
+                            }
+                        }
+                    }
+
+                    li:nth-child(4) {
+                        a {
+                            &:hover {
+                                background-color: #00ff11;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .card-image {
+            width: 30%;
+            height: 100%;
+            object-fit: top;
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 8px;
+    }
+    #ustozlarimiz{
+        .container>h2{
+            font-size: 3rem;
+            text-align: center;
+        }
+    }
+    .profile-cards {
+        @include display-flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        margin: 30px;
+
+        .card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column-reverse;
+            width: 100%;
+            height: 80rem;
+
+            position: relative;
+            letter-spacing: 1px;
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+
+            .card-description {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                padding: 40px;
+
+                width: auto;
+                height: 100%;
+
+                .card-description-title {
+                    color: black;
+
+                    font-size: 18px;
+                }
+
+                .card-description-profession {
+                    display: block;
+
+                    font-size: 16px;
+                }
+
+                .card-description-company {
+                    display: block;
+
+                    font-size: 14px;
+
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .card-description-social {
+                    position: absolute;
+                    bottom: 40px;
+
+                    .card-description-social-follow {
+                        display: block;
+
+                        margin-bottom: 20px;
+
+                        // color: #555572;
+                        font-size: 14px;
+                    }
+
+                    ul {
+                        @include display-flex;
+                        gap: 12px;
+                        justify-content: start;
+
+                        li {
+                            list-style-type: none;
+
+                            a {
+                                @include display-flex;
+                                width: 40px;
+                                height: 40px;
+                                color: #121212;
+                                border-radius: 50%;
+                                box-shadow:
+                                    6px 6px 12px #97c3c4,
+                                    -6px -6px 12px #cdffff;
+
+                                transition: all 0.4s;
+
+                                &:hover {
+                                    color: white;
+
+                                    transform: translate(0, -7px);
+                                }
+
+                                svg {
+                                    width: calc(100% - 15px);
+                                    height: calc(100% - 15px);
+                                }
+                            }
+                        }
+
+                        li:nth-child(1) {
+                            a {
+                                &:hover {
+                                    background-color: #0dff00;
+                                }
+                            }
+                        }
+
+                        li:nth-child(2) {
+                            a {
+                                &:hover {
+                                    background-color: #00ff11;
+                                }
+                            }
+                        }
+
+                        li:nth-child(3) {
+                            a {
+                                &:hover {
+                                    background-color: #00ff11;
+                                }
+                            }
+                        }
+
+                        li:nth-child(4) {
+                            a {
+                                &:hover {
+                                    background-color: #00ff11;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .card-image {
+                width: 100%;
+                height: 38rem;
+                object-fit: cover;
+                background-position: bottom ;
+            }
+        }
+    }
+}
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 8px;
+    }
+}
