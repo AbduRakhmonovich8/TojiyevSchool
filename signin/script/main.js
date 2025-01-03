@@ -15,57 +15,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
-}
-function initClient() {
-    gapi.client.init({
-        apiKey: 'AIzaSyBYVFvHdpK-HvtUi1OOao5mP7y2N_h2aEk',
-        clientId: '77394640808-6muad2npp4q45va0tt69i30985fkh6af.apps.googleusercontent.com',
-        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-        scope: "https://www.googleapis.com/auth/spreadsheets"
-    }).then(function () {
-        gapi.auth2.getAuthInstance().signIn().then(function () {
-            appendData();
-        });
-    }, function (error) {
-        console.error(JSON.stringify(error, null, 2));
+
+let serch = document.querySelector(".search")
+serch.addEventListener("input", () => {
+    var change = document.querySelectorAll("#change")
+    change.forEach(element => {
+        element.classList.remove("hide")
     });
-}
-
-function appendData() {
-    const spreadsheetId = '1NQ4Rsxs228gUdf56aNQeM_ATqnin0Y8tqgOuJc4mJK0';
-    const valueInputOption = 'Ship Date';
-
-    const data = [
-        {
-            range: 'Sheet1!A1:A4',
-            majorDimension: 'COLUMNS',
-            values: [
-                ["Item", "Wheel", "Door", "Engine"]
-            ]
-        },
-        {
-            range: 'Sheet1!B1:D2',
-            majorDimension: 'ROWS',
-            values: [
-                ["Cost", "Stocked", "Ship Date"],
-                ["$20.50", "4", "3/1/2016"]
-            ]
+    change.forEach(element => {
+        if (!element.dataset.name.toLowerCase().includes(serch.value.toLowerCase())) {
+            element.classList.add("hide")
         }
-    ];
-
-    const body = {
-        valueInputOption: valueInputOption,
-        data: data
-    };
-
-    gapi.client.sheets.spreadsheets.values.batchUpdate({
-        spreadsheetId: spreadsheetId,
-        resource: body
-    }).then((response) => {
-        console.log(`${response.result.totalUpdatedCells} cells updated.`);
-    }).catch((error) => {
-        console.error('Error: ', error.result.error.message);
     });
-}
+});
+
+
+let tablebody = document.querySelector(".tablebody")
+let numberUser = document.querySelector(".numberUser")
+
+
+// URL
+const url = "https://script.googleusercontent.com/macros/echo?user_content_key=ddrBy2x665rvuXje5LbC7adRnbh_GDVy2qO3NTrlTfPKeeUcw9SKkBXm67mmAAdz74cDkg7guPPi5vBOLGGD4S39yZxDx6DMm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnMaqO4vzAk1eNU8HFRwYQRJZzAk85ZX9uBfvulnJ5lJtVEeJl33faT6FVTjtLRwc-uH7wEN4nNVLCjL5JDZ6tC-fZohciHsDvQ&lib=M0wjA6ll4jMljXkzIvefnq9_2Uq8BBHw2";
+// GET so'rovini yuborishc
+// let lugat = []
+fetch(url)
+    .then(response => response.json())  // Javobni JSON formatida olish
+    .then(users => {
+        console.log(users);
+        
+        let i = 0
+        for (let element of users) {
+            i++
+            numberUser.textContent = i
+            let Ball = element.Ball
+            if(Ball==""){
+                Ball = "---"
+            }
+            const newRow = `
+            <tr id="change" data-name="${element["Familyangiz nima ?"] + " " + element["Ismingiz nima ?"]}">
+            <td>&nbsp;&nbsp; ${i} &nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp; ${element["Familyangiz nima ?"] + " " + element["Ismingiz nima ?"]} &nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp; ${element["O'quv markazi nomi yoki maktabingiz soni ?"]} &nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp; <a href="${element["O'z rasmingiz ni yuklang ?"]}"> 👁️ </a>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp; ${Ball} &nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp; ${(new Date(element.Timestamp)).toLocaleString()} &nbsp;&nbsp;</td>
+            </tr>
+            `;
+            tablebody.innerHTML += newRow;
+        }
+    })
+    .catch(error => console.error("Xato:", error));  // Agar xatolik bo'lsa
+

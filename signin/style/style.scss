@@ -21,6 +21,7 @@
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+   
 }
 
 body {
@@ -39,6 +40,22 @@ body {
 
 .lenta {
     padding: 10rem 0;
+}
+.button {
+    width: auto;
+    padding: 2px 20px !important;
+    background-color: #0f6ab5;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        background-color 0.3s,
+        transform 0.3s;
 }
 
 marquee {
@@ -93,14 +110,32 @@ nav {
         }
     }
 }
+.bosh {
+    gap: 8rem;
+    input {
+        max-width: 40rem;
+    }
+}
 
 table {
     border-collapse: collapse;
+    overflow: scroll;
     display: flex;
     text-align: left;
+    min-height: 100rem;
+    max-height: 100rem;
     th {
         width: (max-content + 10px);
         background-color: rgb(1, 197, 1);
+        text-align: center;
+        font-size: 0.5rem;
+    }
+    td {
+        padding: 0 5px;
+        text-align: center;
+        a{
+            text-decoration: none;
+        }
     }
 }
 
@@ -373,7 +408,7 @@ table {
         padding: 0;
         margin: 0;
         font-family: "poppins", sans-serif;
-        font-size: 18px;
+        font-size: 3rem;
     }
     body {
         height: 100vh;
@@ -422,17 +457,17 @@ table {
     nav {
         .container {
             justify-content: space-between;
-            h2{
+            h2 {
                 font-size: 14px;
             }
-            .icon {  
+            .icon {
                 scale: 1.5;
                 img {
                     width: 9rem;
                     height: 9rem;
                     margin-right: 0.5rem;
                 }
-    
+
                 h2 {
                     font-family: "Poetsen One", sans-serif;
                     font-weight: 400;
@@ -446,11 +481,24 @@ table {
 }
 @media screen and (max-width: 490px) {
     html {
-        font-size: 3px;
+        font-size: 7px;
     }
 }
 @media screen and (max-width: 400px) {
     html {
-        font-size: 2px;
+        font-size: 3px;
     }
+}
+
+.hide{
+    display: none;
+}
+
+.footer-bottom {
+    background: #222;
+    text-align: center;
+    padding: 0 0;
+    padding: 0.5rem 0;
+    font-size: 2rem;
+    color: #fff;
 }
