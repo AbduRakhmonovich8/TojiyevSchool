@@ -140,7 +140,7 @@ nav .container .menu li a:hover {
   color: red;
 }
 .testsec .container .testbtn {
-  width: auto;
+  width: 25rem;
   padding: 2px 20px;
   background-color: #0f6ab5; /* Primary background color */
   border: none;
@@ -149,6 +149,7 @@ nav .container .menu li a:hover {
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
@@ -314,61 +315,57 @@ header .container img {
   flex-wrap: wrap;
 }
 .time .container .cards .card {
-  width: 25%;
-  height: 40rem;
-  background: #8bff71;
+  width: 30%;
+  height: auto;
+  background: #fefefe;
   background-size: cover;
   border-radius: 2rem;
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
-  margin: 0 0 3rem 3rem;
   -webkit-backdrop-filter: blur(1rem);
           backdrop-filter: blur(1rem);
   box-shadow: 0rem 0rem 1rem black;
   background-position: center;
   position: relative;
   overflow: hidden;
+  text-align: left;
+  padding: 2rem;
+  margin: 2rem;
+}
+.time .container .cards .card h3 {
+  font-size: 2rem;
+}
+.time .container .cards .card p {
+  font-size: 1.5rem;
+}
+.time .container .cards .card ul {
+  list-style: none;
+}
+.time .container .cards .card ul li {
+  font-size: 2rem;
+}
+.time .container .cards .card .link {
+  text-align: right;
+}
+.time .container .cards .card .link a {
+  font-size: 2rem;
+}
+.time .container .cards .card .bg {
+  width: 27rem;
+  height: 27rem;
+  border-radius: 50%;
+  background: var(--bluelight);
+  position: absolute;
+  bottom: -12rem;
+  z-index: -1;
+  right: -134px;
 }
 .time .container .cards .card:hover {
-  transform: scale(1.3);
+  transform: scale(1.1);
 }
-.time .container .cards .card:hover .te {
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
-  background: rgba(255, 255, 255, 0.337254902);
-  bottom: 0% !important;
-}
-.time .container .cards .card .te {
-  position: absolute;
-  text-align: left;
-  width: 100%;
-  bottom: -100%;
-  height: 40rem;
-  display: flex;
-  align-items: start;
-  justify-content: end;
-  flex-direction: column;
-  align-items: start;
-  padding: 1rem;
-}
-.time .container .cards .card .te h3 {
-  color: var(--black);
-  text-align: left;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 3rem;
-  letter-spacing: 0rem;
-  word-spacing: 1rem;
-}
-.time .container .cards .card .te p {
-  color: var(--black);
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2rem;
-  letter-spacing: 0rem;
-  word-spacing: 1rem;
+.time .container .cards .card:hover .bg {
+  width: 41rem;
+  height: 43rem;
 }
 
 .mentor > .container > h2 {
@@ -927,13 +924,14 @@ header .container img {
     padding: 3rem 0;
   }
   .testsec .container h2 {
+    width: 50vw;
     font-size: 1.2rem;
     margin: 0;
     padding: 0;
     color: red;
   }
   .testsec .container .testbtn {
-    width: 30rem;
+    width: 30vw;
     padding: 3px 20px;
     font-size: 1rem;
     margin-left: 4rem;
@@ -1045,7 +1043,6 @@ header .container img {
   }
   .time .container .cards .card {
     width: 75%;
-    height: 22rem;
     margin: 0;
   }
   .time .container .cards .card:hover {

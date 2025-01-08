@@ -73,24 +73,24 @@ marquee div h2 {
   word-spacing: 1rem;
 }
 
-nav .container {
+.nav .container {
   padding: 5rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row-reverse;
 }
-nav .container .icon {
+.nav .container .icon {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-nav .container .icon img {
+.nav .container .icon img {
   width: 9rem;
   height: 9rem;
   margin-right: 0.5rem;
 }
-nav .container .icon h2 {
+.nav .container .icon h2 {
   font-family: "Poetsen One", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -631,21 +631,21 @@ table td a {
   html {
     font-size: 5px;
   }
-  nav .container {
-    justify-content: space-between;
+  .nav .container {
+    justify-content: space-evenly;
   }
-  nav .container h2 {
+  .nav .container h2 {
     font-size: 14px;
   }
-  nav .container .icon {
+  .nav .container .icon {
     scale: 1.5;
   }
-  nav .container .icon img {
+  .nav .container .icon img {
     width: 9rem;
     height: 9rem;
     margin-right: 0.5rem;
   }
-  nav .container .icon h2 {
+  .nav .container .icon h2 {
     font-family: "Poetsen One", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -672,6 +672,6 @@ table td a {
   text-align: center;
   padding: 0 0;
   padding: 0.5rem 0;
-  font-size: 2rem;
+  font-size: 1rem;
   color: #fff;
 }/*# sourceMappingURL=style.css.map */

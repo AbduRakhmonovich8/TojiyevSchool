@@ -81,7 +81,7 @@ marquee {
     }
 }
 
-nav {
+.nav {
     .container {
         padding: 5rem 0;
         display: flex;
@@ -454,9 +454,9 @@ table {
     html {
         font-size: 5px;
     }
-    nav {
+    .nav {
         .container {
-            justify-content: space-between;
+            justify-content: space-evenly;
             h2 {
                 font-size: 14px;
             }
@@ -499,6 +499,6 @@ table {
     text-align: center;
     padding: 0 0;
     padding: 0.5rem 0;
-    font-size: 2rem;
+    font-size: 1rem;
     color: #fff;
 }
