@@ -1,5 +1,3 @@
-
-
 function ShowModal(succes) {
     var loader = document.getElementById('modal');
     var oks = document.getElementById('indOk');
@@ -19,35 +17,27 @@ function ShowModal(succes) {
         }, 4000);
     }
 }
-
-
-
 var telegramChatId = "5672285896"
 document.getElementById('form').addEventListener('click', function (event) {
     event.preventDefault();
-
     // Oldingi xatolarni tozalash
     document.getElementById('error').textContent = '';
-
     // Forma qiymatlarini olish
     var name = document.getElementById('name').value;
     var email = document.getElementById('emailreg').value;
     var message = document.getElementById('messege').value;
     var phone = document.getElementById('phone').value;
-
     // Forma maydonlarini tekshirish
     if (!name || !email || !message || !phone) {
         document.getElementById('error').textContent = 'Barcha maydonlarni to\'ldiring.';
         return;
     }
-
     // Emailni oddiy tekshirish
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         document.getElementById('error').textContent = 'Iltimos, haqiqiy email manzilini kiriting.';
         return;
     }
-
     // Formani jo'natish
     // Telegram botiga xabar yuborish
     var telegramToken = document.getElementById("tt").textContent;
@@ -76,16 +66,12 @@ document.getElementById('form').addEventListener('click', function (event) {
             console.error('Error:', error);
             ShowModal("no")
         });
-
-
     // Forma maydonlarini tozalash
     document.getElementById('name').value = '';
     document.getElementById('emailreg').value = '';
     document.getElementById('messege').value = '';
     document.getElementById('phone').value = '';
 });
-
-
 var tojmod = document.getElementById('tojmod');
 tojmod.style.display = "block";
 document.addEventListener("DOMContentLoaded", function () {
@@ -107,8 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 7000);
     });
 });
-
-
 let docKurs = document.querySelector("#kurslar")
 let sheetKursUrl = "https://script.google.com/macros/s/AKfycbziqY80QYfZT8EpFLUpKCUsSutOpKKuDHTaNLjUM4sc0IUxI8SWjH9hAbvBH7UYJHLf7g/exec"
 fetch(sheetKursUrl)
@@ -140,7 +124,6 @@ fetch(sheetKursUrl)
         }
     })
     .catch(error => console.error("Xato:", error));
-
 let testsec = document.querySelector(".testsec")
 let content = testsec.querySelector("h2")
 let button_content = testsec.querySelector(".testbtn")
@@ -152,38 +135,34 @@ let settingURL = "https://script.google.com/macros/s/AKfycby6qXDAicRFqlvS0Q93UhO
 fetch(settingURL)
     .then(response => response.json())  // Javobni JSON formatida olish
     .then(users => {
-        for (let element of users) {
-            let indicator = element['elon turi']
-            let bildirishnma_BoshMenu = element['bildirishnma_BoshMenu']
-            let Tell_number_BoshMenu = element['Tell_number_BoshMenu']
-            let Instagram_link_BoshMenu = element['Instagram_link_BoshMenu']
-            let telegram_link_BoshMenu = element['telegram_link_BoshMenu']
-            telegramChatId = element['TG_chatID']
-
-            instalink.forEach(el=>{
-                el.href = Instagram_link_BoshMenu
-            })
-            tglink.forEach(el=>{
-                el.href = telegram_link_BoshMenu
-            })
-            smslink.href = `sms:+${Tell_number_BoshMenu}?&body=Salom mening ismim ______. Mening sizga yozishdan maqsadim__________`
-            tellLink.href = `tel:+${Tell_number_BoshMenu}`
-
-
-            switch (indicator) {
-                case "royhatga_olish":
-                    testsec.style.display = "flex"
-                    content.textContent = bildirishnma_BoshMenu
-                    button_content.textContent = "Ro'yhatdan o'tish"
-                    break;
-                case "test_javobi":
-                    testsec.style.display = "flex"
-                    content.textContent = bildirishnma_BoshMenu
-                    button_content.textContent = "Test javobini bilish"
-                    break;
-                default:
-                    break;
-            }
+        let element = users[0]
+        let indicator = element['elon turi']
+        let bildirishnma_BoshMenu = element['bildirishnma_BoshMenu']
+        let Tell_number_BoshMenu = element['Tell_number_BoshMenu']
+        let Instagram_link_BoshMenu = element['Instagram_link_BoshMenu']
+        let telegram_link_BoshMenu = element['telegram_link_BoshMenu']
+        telegramChatId = element['TG_chatID']
+        instalink.forEach(el => {
+            el.href = Instagram_link_BoshMenu
+        })
+        tglink.forEach(el => {
+            el.href = telegram_link_BoshMenu
+        })
+        smslink.href = `sms:+${Tell_number_BoshMenu}?&body=Salom mening ismim ______. Mening sizga yozishdan maqsadim__________`
+        tellLink.href = `tel:+${Tell_number_BoshMenu}`
+        switch (indicator) {
+            case "royhatga_olish":
+                testsec.style.display = "flex"
+                content.textContent = bildirishnma_BoshMenu
+                button_content.textContent = "Ro'yhatdan o'tish"
+                break;
+            case "test_javobi":
+                testsec.style.display = "flex"
+                content.textContent = bildirishnma_BoshMenu
+                button_content.textContent = "Test javobini bilish"
+                break;
+            default:
+                break;
         }
     })
     .catch(error => console.error("Xato:", error));
