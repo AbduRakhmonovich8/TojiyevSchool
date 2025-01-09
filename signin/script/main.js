@@ -59,6 +59,7 @@ fetch(settingURL)
                     tableContent.textContent = Asosiy_tablitsa_kontenti
                     extraContent.textContent = Maxsus_Elon
                     button.style.display = "block"
+                    serch.placeholder = "To'lovni tekshirish"
                     break;
                 case "test_javobi":
                     nav.style.display = "block"
@@ -66,6 +67,7 @@ fetch(settingURL)
                     tableContent.textContent = Asosiy_tablitsa_kontenti
                     extraContent.textContent = Maxsus_Elon
                     tolov.textContent = "Ball"
+                    serch.placeholder = "Ballni tekshirish"
                     break;
                 default:
                     break;
