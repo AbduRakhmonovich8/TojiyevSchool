@@ -73,7 +73,7 @@ nav {
   position: fixed;
   z-index: 10;
   width: 100%;
-  background: rgba(105, 255, 51, 0.631372549);
+  background: rgba(68, 252, 1, 0.9098039216);
   top: 0;
   -webkit-backdrop-filter: blur(9px);
           backdrop-filter: blur(9px);
