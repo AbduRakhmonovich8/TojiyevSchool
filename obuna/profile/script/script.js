@@ -78,6 +78,7 @@ async function testData(data = "", option = "get", url) {
     currentUrl = url + "?action=" + option;
   }
   currentUrl = `${url}?action=${option}&data=${JSON.stringify(data)}`;
+  console.log(currentUrl);
   try {
     // fetch chaqiruvi va javobni kutish
     const response = await fetch(currentUrl);
@@ -90,15 +91,15 @@ async function testData(data = "", option = "get", url) {
 }
 
 // arrayli funktion
-async function sendRequests() {
-  for (let index = 0; index < jsonQuestion.length; index++) {
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 soniya interval
-    testData(jsonQuestion[index], "post", DateUrl);
-    console.log(
-      "loading: " + parseInt(index / (jsonQuestion.length / 100)) + " %"
-    );
-  }
-}
+// async function sendRequests() {
+//   for (let index = 0; index < jsonQuestion.length; index++) {
+//     await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 soniya interval
+//     testData(jsonQuestion[index], "post", DateUrl);
+//     console.log(
+//       "loading: " + parseInt(index / (jsonQuestion.length / 100)) + " %"
+//     );
+//   }
+// }
 // sendRequests();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////1
@@ -219,8 +220,9 @@ async function hashPassword(password) {
 }
 // Test qilish
 input1.addEventListener("click", async (e) => {
-  let login1 = kirish.querySelector("#login1").value;
-  let pass1 = kirish.querySelector("#password1").value;
+  e.preventDefault()
+  let login1 = kirish.querySelector("#login1").value.toString();
+  let pass1 = kirish.querySelector("#password1").value.toString();
   data = {
     phone: login1,
     hashPassword: await hashPassword(pass1),
@@ -239,13 +241,15 @@ input1.addEventListener("click", async (e) => {
 });
 
 input2.addEventListener("click", async (e) => {
+  e.preventDefault()
   let fam = kirish.querySelector("#fam").value;
   let date = kirish.querySelector("#date").value;
   let tell = kirish.querySelector("#tell").value;
   let maktab = kirish.querySelector("#maktab").value;
   let password2 = kirish.querySelector("#password2").value;
   let password22 = kirish.querySelector("#password22").value;
-  if (password2 == password22 && password2 > 1) {
+  if (password2 == password22) {
+    alert(password2, password22)
     data = {
       timeStamp: new Date(),
       name: fam,
@@ -256,7 +260,7 @@ input2.addEventListener("click", async (e) => {
       parol: password2,
     };
 
-    console.log(await testData(data, "post", userUrl));
+    alert(await testData(data, "post", userUrl));
     const responseAccess = await testData(data, "check", userUrl);
     if(responseAccess.status=="200"){
       alert(responseAccess.message)
