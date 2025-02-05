@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="./style/login.css" />
   </head>
   <body>
-    <div class="kirish">
-      <div class="box box1 hidden">
+    <div class="modal hidden">
+      <p>TojiyevSchool<br><b class="content">Yuklanmoqda...</b></p>
+    </div>
+    <div class="kirish hidden">
+      <div class="box box1">
         <span class="borderLine"></span>
-        <form action="#">
+        <form >
           <img src="./img/Screenshot 2025-01-23 005622.png" alt="logo" />
           <h2>Kirish</h2>
           <div class="inputBox">
@@ -30,9 +33,9 @@
           <input type="submit" id="submit1" value="Login" />
         </form>
       </div>
-      <div class="box box2">
+      <div class="box box2 hidden">
         <span class="borderLine"></span>
-        <form action="#">
+        <form action="submit">
           <img src="./img/Screenshot 2025-01-23 005622.png" alt="logo" />
           <h2>Kirish</h2>
           <div class="inputBox">
@@ -47,7 +50,7 @@
           </div>
           <div class="inputBox">
             <input id="tell" name="tell" type="text" required />
-            <span>Telifon raqami</span>
+            <span>Telifon raqami M:(943333333)</span>
             <i></i>
           </div>
           <div class="inputBox">
@@ -61,7 +64,7 @@
             <span>Kalitso'z</span>
             <i></i>
           </div>
-          
+
           <div class="inputBox">
             <input id="password22" name="password" type="password" required />
             <span>Kalitso'zni qayta kiriting !!!</span>
@@ -75,11 +78,14 @@
         </form>
       </div>
     </div>
-    <div class="logined hidden">
+    <div class="logined ">
       <nav>
         <div class="container">
           <img src="./img/Screenshot 2025-01-23 005622.png" alt="logo" />
-          <p>Xudoyberdiyeb Abzarbek Abdurahmon o'gli &nbsp; <img class="logout" src="./img/logout.png" alt="log out"></p>
+          <p>
+            <p id="nameUser">Abzarbek Xudoyberdiyev Abdurahmon o'g'li</p> &nbsp;
+            <a class="logoutbtn" href="#"><img class="logout" src="./img/logout.png" alt="log out" /></a>
+          </p>
         </div>
       </nav>
 
@@ -88,10 +94,10 @@
           <div class="container">
             <img src="./img/47025187.jpg" alt="usr" />
             <div class="detales">
-              <h3>Abzarbek Xudoyberdiyev Abdurahmon o'g'li</h3>
-              <p>+998944646412</p>
-              <p>Obuna 01.01.2024 gacha ✅</p>
-              <span>TojiyevSchool o'quv markazi</span>
+              <h3 id="nameUser">Abzarbek Xudoyberdiyev Abdurahmon o'g'li</h3>
+              <p id="tellUser">+998944646412</p>
+              <p id="indexUser">Obuna 01.01.2024 gacha ✅</p>
+              <span id="markazUser">TojiyevSchool o'quv markazi</span>
             </div>
           </div>
         </section>
@@ -213,7 +219,11 @@
         <div class="container">
           <section>
             <button class="quit">Testdanchiqish</button>
-            <form name="quizForm" preventDefault onsubmit="return submitAnswers(event)">
+            <form
+              name="quizForm"
+              preventDefault
+              onsubmit="return submitAnswers(event)"
+            >
               <!-- <h3>
                 5. A variable in JavaScript must start with which special
                 character?
@@ -235,6 +245,7 @@
         &copy; 2024 Termiz | Xudoyberdiyev A.
       </footer>
     </div>
+
     <script src="./script/script.js"></script>
     <script
       type="text/javascript"

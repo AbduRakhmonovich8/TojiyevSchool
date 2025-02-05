@@ -66,27 +66,58 @@ const jsonQuestion = [
   },
 ];
 
+let user = "";
+let tell = "";
+let date = "";
+let oquv_markaz = "";
+const logined = document.querySelector(".logined");
+const kirish = document.querySelector(".kirish");
+
+document.querySelector(".logoutbtn").addEventListener("click", () => {
+  user = "";
+  tell = "";
+  date = "";
+  oquv_markaz = "";
+  kirish.classList.remove("hidden");
+  logined.classList.add("hidden");
+});
+function chizishUser(data) {
+  let mal = data.data;
+  document.querySelectorAll("#nameUser").forEach((element) => {
+    element.textContent = mal.name;
+  logined.querySelector("#tellUser").textContent = "+998"+mal.tell
+  logined.querySelector("#indexUser").textContent = "Obuna "+mal
+  });
+}
+
+const modal = document.querySelector(".modal");
+let showMsg = modal.querySelector(".content");
+function showMsgFunk(msg = "yuklanmoqda...") {
+  modal.classList.remove("hidden");
+  showMsg.textContent = msg;
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    showMsg.textContent = "yuklanmoqda...";
+  }, 2000);
+}
+
 // data crate functions
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-let DateUrl = `https://script.google.com/macros/s/AKfycbyOyY6HcUNtrNt8Yryd5rdYx6jOWrFJJrCjLOe71bXbK7Yi2s_Ztxlx3HXTD-Fr9_tK/exec`;
+let DateUrl = `https://script.google.com/macros/s/AKfycbxbjz7TNqwW3FHzT8-6Edf4GJuisClbpAhjpBnl6YhP58MDGRHSo_FjazmAzZb9-8iU/exec`;
 
 async function testData(data = "", option = "get", url) {
-  console.log("fldshfodshfiugdshiufgds");
-
   let currentUrl = "";
   if (option === "get") {
     currentUrl = url + "?action=" + option;
   }
   currentUrl = `${url}?action=${option}&data=${JSON.stringify(data)}`;
-  console.log(currentUrl);
   try {
     // fetch chaqiruvi va javobni kutish
     const response = await fetch(currentUrl);
     const responseData = await response.json(); // javobni JSON formatda olish
     return await responseData; // data ni qaytarish
   } catch (error) {
-    console.log(error);
-    return await error; // xatolikni qaytarish
+    return await "network"; // xatolikni qaytarish
   }
 }
 
@@ -203,8 +234,7 @@ document.querySelector(".changeR").addEventListener("click", onTogleRoyhat);
 // login Part
 //////////////////////////////////////////////////////////////////////////////////////////////////
 const userUrl =
-  "https://script.google.com/macros/s/AKfycbzsJ-ckRlhdoHppDKcTuD_ew9VZjYM2jSKdKLl8krjDVzEHICmjhVn5pXJ57kolN0TG/exec";
-const kirish = document.querySelector(".kirish");
+  "https://script.google.com/macros/s/AKfycbwyXofgQ2MpfI-LxzqgqzfYxooxgk-Z92T2gM7xrqIkPFm8soNQQES6_GUVlvOw97ei/exec ";
 const input1 = kirish.querySelector("#submit1");
 const input2 = kirish.querySelector("#submit2");
 
@@ -220,7 +250,7 @@ async function hashPassword(password) {
 }
 // Test qilish
 input1.addEventListener("click", async (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let login1 = kirish.querySelector("#login1").value.toString();
   let pass1 = kirish.querySelector("#password1").value.toString();
   data = {
@@ -228,12 +258,20 @@ input1.addEventListener("click", async (e) => {
     hashPassword: await hashPassword(pass1),
   };
   if (login1 && pass1) {
-    console.log(await testData(data, "check", userUrl));
+    modal.classList.remove("hidden");
     const responseAccess = await testData(data, "check", userUrl);
-    if (responseAccess.message == "Kirish Muvaffaqiyatli") {
-      alert("✅");
+    if (responseAccess == "network") {
+      showMsgFunk("Internetga ulanishda muammo !!!");
+    } else if (responseAccess.message == "Kirish Muvaffaqiyatli") {
+      showMsgFunk("Muovfaqiyatli ✅");
+      console.log(responseAccess);
+      chizishUser(responseAccess);
+      login1 = "";
+      pass1 = "";
+      kirish.classList.add("hidden");
+      logined.classList.remove("hidden");
     } else {
-      alert("Parol yoki tell raqam xato !!!");
+      showMsgFunk("Kalitso'z yoki telifon raqam xato !!!");
     }
   } else {
     console.log("clicked");
@@ -241,15 +279,24 @@ input1.addEventListener("click", async (e) => {
 });
 
 input2.addEventListener("click", async (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let fam = kirish.querySelector("#fam").value;
   let date = kirish.querySelector("#date").value;
   let tell = kirish.querySelector("#tell").value;
   let maktab = kirish.querySelector("#maktab").value;
   let password2 = kirish.querySelector("#password2").value;
   let password22 = kirish.querySelector("#password22").value;
-  if (password2 == password22) {
-    alert(password2, password22)
+  if (tell && (isNaN(+tell) || tell.length != 9)) {
+    showMsgFunk("Telifon raqam 9 ta raqamdan tashkil topsin !!!");
+  } else if (
+    password2 == password22 &&
+    fam &&
+    tell &&
+    date &&
+    maktab &&
+    password2.length > 5
+  ) {
+    modal.classList.remove("hidden");
     data = {
       timeStamp: new Date(),
       name: fam,
@@ -259,25 +306,24 @@ input2.addEventListener("click", async (e) => {
       stadyCenter: maktab,
       parol: password2,
     };
-
-    alert(await testData(data, "post", userUrl));
-    const responseAccess = await testData(data, "check", userUrl);
-    if(responseAccess.status=="200"){
-      alert(responseAccess.message)
-    }else{
-      alert(responseAccess.message)
-    }
-  } else {
-    if (fam && date) {
-      const h2index = kirish.querySelector(".box2 h2");
-      h2index.style.color = "red";
-      h2index.textContent = "parol 4ta belgidan kam bolmasligi zarur !!!";
-      setTimeout(() => {
-        h2index.style.color = "white";
-        h2index.textContent = "Kirish";
-      }, 3000);
+    const responseAccess = await testData(data, "post", userUrl);
+    if (responseAccess == "network") {
+      showMsgFunk("Internetga ulanishda muammo !!!");
+    } else if (responseAccess.status == "200") {
+      showMsgFunk(responseAccess.message);
+      fam = "";
+      tell = "";
+      maktab = "";
+      password2 = "";
+      password22 = "";
     } else {
-      console.log("clicked");
+      showMsgFunk(responseAccess.message);
     }
+  } else if (password2.length < 6 && tell && date && fam && maktab) {
+    showMsgFunk("Parol kamida 6ta belgidan tashkil topsin !!!");
+  } else if (password2 != password22 && tell && date && fam && maktab) {
+    showMsgFunk("Parollar mos emas !!!");
+  } else {
+    showMsgFunk("Malumotlarni to'ldiring !!!");
   }
 });

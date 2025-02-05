@@ -26,7 +26,7 @@
 .box {
     position: relative;
     width: 380px;
-    height: 517px;
+    height: 550px;
     background: #1c1c1cef;
     border-radius: 8px;
     overflow: hidden;
@@ -147,6 +147,25 @@
     opacity: 0.8;
 }
 
+.modal{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #8ff199a8;
+    backdrop-filter: blur(15px);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: 4.5rem;
+        font-weight: 900;
+        text-align: center;
+        .content{
+            font-size: 2rem;
+        }
+    }
+}
 .hidden{
     display: none;
 }
