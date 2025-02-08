@@ -181,6 +181,7 @@ nav p {
 }
 .exam form input {
   font-size: var(--psize);
+  border: 0;
 }
 
 @media screen and (max-width: 800px) {
@@ -209,9 +210,6 @@ nav p {
   .scores .container .detales p {
     font-size: 2rem;
     margin: 1rem 0;
-  }
-  .scores .container .detales span {
-    font-size: 1rem;
   }
 }
 @media screen and (max-width: 600px) {
