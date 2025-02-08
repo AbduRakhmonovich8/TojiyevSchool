@@ -178,7 +178,7 @@ async function makeForm(url) {
     javoblar[index] = elem.trj;
   });
 
-  innertext += `<input type="submit" name="quizForm" id="submit" value="tekshirish">`;
+  innertext += `<input class="input" type="submit" name="quizForm" id="submit" value="tekshirish">`;
   form.innerHTML = innertext;
   MathJax.typeset();
   answare1 = await javoblar;

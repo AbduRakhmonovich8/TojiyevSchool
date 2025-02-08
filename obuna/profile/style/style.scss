@@ -72,7 +72,6 @@ nav{
     width: 100vw;
 }
 .timeTest{
-    padding: 5rem 0;
     .container{
         .card{
             width: 100%;
@@ -126,6 +125,7 @@ nav{
 
 
 .testlar{
+    margin: 5rem 0;
     .container{
         gap: 2rem;
         flex-direction: column;
@@ -147,8 +147,9 @@ nav{
                 font-size: var(--psize);
                 margin: 1rem 0 2rem;
             }
-            a{
+            button{
                 font-size: var(--psize);
+                border: 0;
             }
 
             &:before{
@@ -194,7 +195,9 @@ nav{
         }
         input{
             font-size: var(--psize);
-            border: 0;
+        }
+        .input{
+            margin: 4rem 0;
         }
       }
 }
@@ -226,7 +229,6 @@ nav{
                 }
                 p{
                     font-size: 2rem;
-                    margin: 1rem 0;
                 }
                 
             }
