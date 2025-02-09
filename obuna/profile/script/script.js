@@ -51,7 +51,6 @@ async function testData(data = "", option = "get", url) {
     const responseData = await response.json(); // javobni JSON formatda olish
     return await responseData; // data ni qaytarish
   } catch (error) {
-    console.log(error);
     return await "network"; // xatolikni qaytarish
   }
 }
@@ -109,7 +108,6 @@ input1.addEventListener("click", async (e) => {
       showMsgFunk("Internetga ulanishda muammo !!!");
     } else if (responseAccess.message == "Kirish Muvaffaqiyatli") {
       showMsgFunk("Muovfaqiyatli ✅");
-      console.log(responseAccess);
       chizishUser(responseAccess);
       testDetalistChiz();
       login1 = "";
@@ -179,14 +177,8 @@ input2.addEventListener("click", async (e) => {
 const Admin_db =
   "https://script.google.com/macros/s/AKfycbwvm-mkisnpuZRhlKB289cnsLVXje62_qmQ6sl960d6sDdvSr2xd4u1x4-wXJuLo8st/exec"; // test.db
 
-async function ssss() {
-  console.log(await testDataChose("obunachi_testlari", Admin_db));
-}
-ssss();
-
 async function testDataChose(sheetname = "", url) {
   let currentUrl = url + "?method=" + sheetname;
-  console.log(currentUrl);
   try {
     // fetch chaqiruvi va javobni kutish
     const response = await fetch(currentUrl);
@@ -224,3 +216,27 @@ async function testDetalistChiz() {
   buttonOnClick();
 }
 
+// set alarm
+document.getElementById("downloadICS").addEventListener("click", function () {
+  // ICS fayl formati
+  const eventData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MyApp//NONSGML v1.0//EN
+BEGIN:VEVENT
+UID:12345@example.com
+DTSTAMP:20250210T120000Z
+DTSTART:20250215T140000Z
+DTEND:20250215T150000Z
+SUMMARY:My Test Event
+DESCRIPTION:Bu test tadbiri
+LOCATION:Toshkent, Uzbekistan
+END:VEVENT
+END:VCALENDAR`;
+
+  const blob = new Blob([eventData], { type: "text/calendar" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "event.ics"; // ICS fayl nomi
+  a.click();
+});

@@ -19,7 +19,6 @@
 }
 html{
     font-size: 10px;
-    overflow-x: hidden;
 }
 
 .logined{
@@ -177,8 +176,8 @@ nav{
     }
 }
 .footer-bottom {
-    background: var(--bluelight);
     z-index: 5;
+    background: var(--bluelight);
     text-align: center;
     padding: 0 0;
     padding: 0.5rem 0;
@@ -250,7 +249,26 @@ nav{
     }
     
 }
-
+.modal{
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #8ff199a8;
+    backdrop-filter: blur(15px);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        font-size: 4.5rem;
+        font-weight: 900;
+        text-align: center;
+        .content{
+            font-size: 2rem;
+        }
+    }
+}
 
 .hidden{
     display: none;

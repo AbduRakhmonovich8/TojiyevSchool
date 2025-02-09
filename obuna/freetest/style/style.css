@@ -21,7 +21,6 @@
 
 html {
   font-size: 10px;
-  overflow-x: hidden;
 }
 
 .logined {
@@ -166,8 +165,8 @@ nav p {
 }
 
 .footer-bottom {
-  background: var(--bluelight);
   z-index: 5;
+  background: var(--bluelight);
   text-align: center;
   padding: 0 0;
   padding: 0.5rem 0;
@@ -228,6 +227,28 @@ nav p {
     font-size: 7px;
   }
 }
+.modal {
+  top: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(143, 241, 153, 0.6588235294);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal p {
+  font-size: 4.5rem;
+  font-weight: 900;
+  text-align: center;
+}
+.modal p .content {
+  font-size: 2rem;
+}
+
 .hidden {
   display: none;
 }/*# sourceMappingURL=style.css.map */
