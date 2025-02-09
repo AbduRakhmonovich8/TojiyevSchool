@@ -208,13 +208,61 @@ async function testDetalistChiz() {
                 </p>
                 <button data-name="${
                   data.testnomi
-                }" class="button passexsam" href="">Test ishlash</button>
+                }" data-index="false" class="button passexsam" href="">Test ishlash</button>
       </div>
     `;
     testlar_part.innerHTML = innertext;
   });
   buttonOnClick();
 }
+
+// soatlik testlar
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+let icvfile = "";
+function convertToICalFormat(isoDate) {
+  return new Date(isoDate).toISOString().replace(/[-:.]/g, "").slice(0, 15) + "Z";
+}
+async function soatlik_testlar(Admin_db) {
+  const [testjson] = await testDataChose("soatlik_testlar", Admin_db);
+  console.log(testjson);
+  const notest = document.querySelector(".notesTest")
+  const h3t = notest.querySelector("h3")
+  const icst = notest.querySelector("#downloadICS")
+  const examt =notest.querySelector("#passexsamt")
+  console.log(testjson.Messege);
+  
+  h3t.textContent = testjson.Messege
+  if (testjson.test_index == "test_bor") {
+    notest.classList.remove("hidden")
+    icst.classList.remove("hidden")
+  } else if (testjson.test_index == "test_jarayonda") {
+    notest.classList.remove("hidden")
+    examt.classList.remove("hidden")
+    let datet = json
+    icvfile = `
+      BEGIN:VCALENDAR
+      VERSION:2.0
+      PRODID:-//MyApp//NONSGML v1.0//EN
+      BEGIN:VEVENT
+      DTSTAMP:20250210T120000Z
+      DTSTART:20250215T140000Z
+      DTEND:20250215T150000Z
+      SUMMARY:My Test Event
+      DESCRIPTION:Bu test tadbiri
+      END:VEVENT
+      END:VCALENDAR`;
+  }
+}
+soatlik_testlar(Admin_db);
+
+let datae = {
+  Messege: "mugun soat 18-00 dan 19-00 gacha test bor prezdident maktablariga",
+  calendar_notes:
+    "10 minutdan keyyin tojiyev school 1 soatlik test boshlanadi iltios buni otkazib yubormang",
+  "test vaqti kuni": "2025-02-28T14:00:00.000Z",
+  test_bolimi: "prezdident_2028_02_05",
+  test_index: "test_bor",
+};
 
 // set alarm
 document.getElementById("downloadICS").addEventListener("click", function () {
