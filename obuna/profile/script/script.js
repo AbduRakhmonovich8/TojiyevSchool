@@ -219,7 +219,8 @@ async function testDetalistChiz() {
 // set alarm
 document.getElementById("downloadICS").addEventListener("click", function () {
   // ICS fayl formati
-  const eventData = `BEGIN:VCALENDAR
+  const eventData = `
+BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//MyApp//NONSGML v1.0//EN
 BEGIN:VEVENT
@@ -227,9 +228,14 @@ UID:12345@example.com
 DTSTAMP:20250210T120000Z
 DTSTART:20250215T140000Z
 DTEND:20250215T150000Z
-SUMMARY:My Test Event
-DESCRIPTION:Bu test tadbiri
+SUMMARY:Muhim Uchrashuv
+DESCRIPTION:Bu uchrashuv juda muhim!
 LOCATION:Toshkent, Uzbekistan
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:30 daqiqa qoldi! Uchrashuvni eslang!
+END:VALARM
 END:VEVENT
 END:VCALENDAR`;
 
