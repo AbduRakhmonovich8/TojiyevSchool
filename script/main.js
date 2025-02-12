@@ -1,3 +1,18 @@
+let settingURL = "https://script.google.com/macros/s/AKfycbwvm-mkisnpuZRhlKB289cnsLVXje62_qmQ6sl960d6sDdvSr2xd4u1x4-wXJuLo8st/exec"
+
+
+async function testDataChose(sheetname = "", url) {
+    let currentUrl = url + "?method=" + sheetname;
+    try {
+      // fetch chaqiruvi va javobni kutish
+      const response = await fetch(currentUrl);
+      const responseData = await response.json(); // javobni JSON formatda olish
+      return await responseData; // data ni qaytarish
+    } catch (error) {
+      ShowModal("error"); // xatolikni qaytarish
+    }
+  }
+//////////////////////////////////////////////////////////////////////////////////// MODAL
 function ShowModal(succes) {
     var loader = document.getElementById('modal');
     var oks = document.getElementById('indOk');
@@ -17,6 +32,7 @@ function ShowModal(succes) {
         }, 4000);
     }
 }
+/////////////////////////////////////////////////////////////////////////////////// TELEGRAM ORQALI XABAR BERISH
 var telegramChatId = "5672285896"
 document.getElementById('form').addEventListener('click', function (event) {
     event.preventDefault();
@@ -72,6 +88,7 @@ document.getElementById('form').addEventListener('click', function (event) {
     document.getElementById('messege').value = '';
     document.getElementById('phone').value = '';
 });
+///////////////////////////////////////////////////////////////////////////////LOADING PAGE ...
 var tojmod = document.getElementById('tojmod');
 tojmod.style.display = "block";
 document.addEventListener("DOMContentLoaded", function () {
@@ -93,13 +110,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 7000);
     });
 });
+//////////////////////////////////////////////////////////////////////////////// KURSLARNI CHIZISH
 let docKurs = document.querySelector("#kurslar")
-let sheetKursUrl = "https://script.google.com/macros/s/AKfycbziqY80QYfZT8EpFLUpKCUsSutOpKKuDHTaNLjUM4sc0IUxI8SWjH9hAbvBH7UYJHLf7g/exec"
-fetch(sheetKursUrl)
-    .then(response => response.json())  // Javobni JSON formatida olish
-    .then(users => {
-        let innerText
-        for (let element of users) {
+async function chizKurs(url) {
+    let incData = await testDataChose("kurslar_kunlari",settingURL)
+    console.log(incData);
+    let innerText
+        for (let element of incData) {
             let kun1 = [element.kun1, element.kun2, element.kun3, element.kun4, element.kun5, element.kun6, element.kun7]
             let kurs_nomi = element.kurs_nomi
             let kurs = ""
@@ -122,8 +139,9 @@ fetch(sheetKursUrl)
 
             docKurs.innerHTML += innerText
         }
-    })
-    .catch(error => console.error("Xato:", error));
+}
+chizKurs(settingURL)
+////////////////////////////////////////////////////////////////////////////// Aloqa sohasini olish
 let testsec = document.querySelector(".testsec")
 let content = testsec.querySelector("h2")
 let button_content = testsec.querySelector(".testbtn")
@@ -131,7 +149,6 @@ let instalink = document.querySelectorAll('#instalink')
 let tglink = document.querySelectorAll('#tglink')
 let smslink = document.querySelector('#smslink')
 let tellLink = document.querySelector('#tellLink')
-let settingURL = "https://script.google.com/macros/s/AKfycby6qXDAicRFqlvS0Q93UhO-WH1zMbd2joqYwgp8EjL4J1Egd8Uz8TpcMpGYKMhCRbH7/exec"
 fetch(settingURL)
     .then(response => response.json())  // Javobni JSON formatida olish
     .then(users => {
