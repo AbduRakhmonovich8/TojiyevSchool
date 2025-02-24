@@ -1,82 +1,5 @@
-// const jsonQuestion = [
-//   {
-//     question:
-//       "Agar \\( f(x) = x^2 - 1 \\) va \\( g(x) = 3 - 2x \\) bo'lsa, \\( f(g(x)) \\) ni toping.",
-//     aj: "4x^2 - 12x + 8",
-//     bj: "4x^2 + 12x - 8",
-//     cj: "5 - 2x^2",
-//     trj: "a",
-//   },
-//   {
-//     question:
-//       "\\( f(t) = t^4 - 2t^2 + 1 \\) bo'lsa, \\( f'(1) \\) ni hisoblang.",
-//     aj: "0",
-//     bj: "4",
-//     cj: "2",
-//     trj: "b",
-//   },
-//   {
-//     question:
-//       "\\( f(x) = \\frac{1}{1 - \\cos(-x + 8\\pi)} \\) funksiyaning boshlang'ich funksiyasini toping.",
-//     aj: "\\( \\frac{1}{2} \\tg \\frac{x}{2} + C \\)",
-//     bj: "\\( \\frac{1}{2} \\ctg \\frac{x}{2} + C \\)",
-//     cj: "\\( - \\ctg \\frac{x}{2} + C \\)",
-//     trj: "a",
-//   },
-
-//   {
-//     question:
-//       "Simplify: \\( \\frac{3 \\sqrt{25}}{2} + \\frac{\\sqrt{81}}{4} \\)",
-//     aj: "18.25",
-//     bj: "16.5",
-//     cj: "17",
-//     trj: "a",
-//   },
-//   {
-//     question:
-//       "Solve: \\( \\sqrt{\\frac{121}{49}} + \\frac{5}{7} \\times \\sqrt{16} \\)",
-//     aj: "5.71",
-//     bj: "6.14",
-//     cj: "5.5",
-//     trj: "b",
-//   },
-//   {
-//     question:
-//       "Find: \\( \\frac{\\sqrt{64} + \\frac{7}{3}}{\\frac{5}{6}} - \\sqrt{\\frac{36}{9}} \\)",
-//     aj: "18.6",
-//     bj: "19.2",
-//     cj: "17.4",
-//     trj: "b",
-//   },
-//   {
-//     question:
-//       "Simplify: \\( \\sqrt{\\frac{49}{25}} \\times \\left( \\frac{9}{4} + \\frac{1}{2} \\right) \\)",
-//     aj: "7.35",
-//     bj: "6.8",
-//     cj: "8.1",
-//     trj: "a",
-//   },
-//   {
-//     question:
-//       "Evaluate: \\( \\left( \\frac{3}{2} \\times \\sqrt{16} \\right) + \\frac{\\sqrt{81}}{3} - \\frac{7}{5} \\)",
-//     aj: "9.1",
-//     bj: "8.6",
-//     cj: "8.8",
-//     trj: "c",
-//   },
-// ];
-// // arrayli funktion
-// async function sendRequests(jsonQuestion) {
-//   for (let index = 0; index < jsonQuestion.length; index++) {
-//     await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 soniya interval
-//     testDatafortest("ommaviy",jsonQuestion[index], "post", testDataUrl);
-//     console.log(
-//       "loading: " + parseInt(index / (jsonQuestion.length / 100)) + " %"
-//     );
-//   }
-// }
-// sendRequests(jsonQuestion);
 let testDataUrl = `https://script.google.com/macros/s/AKfycbyQ39u4l7Iscnouu1tPyCGh1dAWWwhI4b35OT4210vpNKeUfbBCjBOH8p4ajepdVlz_/exec`;
+let passexsam
 function showMsgFunk(msg = "yuklanmoqda...", visiblity = true) {
   modal.classList.remove("hidden");
   showMsg.textContent = msg;
@@ -145,7 +68,7 @@ function submitAnswers(e) {
   }
 }
 // test yasash uchun ishlatiladi
-async function makeForm(url) {
+async function makeForm(url,sheetname) {
   let hedermal = {
     question: "question",
     aj: "aj",
@@ -153,8 +76,8 @@ async function makeForm(url) {
     cj: "cj",
     trj: "trj",
   };
-  await testDatafortest("ommaviy", hedermal, "post", testDataUrl);
-  let jsonFile = await testDatafortest("ommaviy", "", "get", url).then(
+  await testDatafortest(sheetname, hedermal, "post", testDataUrl);
+  let jsonFile = await testDatafortest(sheetname, "", "get", url).then(
     (rej) => rej.data
   );
   let javoblar = [];
@@ -187,11 +110,12 @@ async function makeForm(url) {
 // working siyt
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function buttonOnClick(){
-  document.querySelectorAll(".passexsam").forEach((elem, index) => {
+  document.querySelectorAll(".passexsam").forEach((elem) => {
     elem.addEventListener("click", (e) => {
       e.preventDefault();
+      passexsam = e.target.dataset.name  
       showMsgFunk(undefined,false)
-      makeForm(testDataUrl);
+      makeForm(testDataUrl,passexsam);
       document.querySelector(".profile").classList.add("hidden");
       document.querySelector(".exam").classList.remove("hidden");
     });
