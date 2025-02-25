@@ -232,33 +232,11 @@ async function soatlik_testlar(Admin_db) {
   console.log(testjson);
   const notest = document.querySelector(".notesTest");
   const h3t = notest.querySelector("h3");
-  const icst = notest.querySelector("#downloadICS");
   const examt = notest.querySelector("#passexsamt");
   console.log(await testjson.messege);
-
   h3t.textContent = await testjson.messege;
   if (testjson.test_index == "test_bor") {
     notest.classList.remove("hidden");
-    icst.classList.remove("hidden");
-    eventData = await `
-    BEGIN:VCALENDAR
-    VERSION:2.0
-    PRODID:-//MyApp//NONSGML v1.0//EN
-    BEGIN:VEVENT
-    DTSTAMP:${await testjson.test_vaqti_kuni}
-    DTSTART:${await testjson.test_vaqti_kuni}
-    DTEND:${await testjson.tugash_vaqti}
-    SUMMARY:${await testjson.message}
-    DESCRIPTION:${await testjson.message} 
-    BEGIN:VALARM
-    TRIGGER:-PT10M
-    ACTION:AUDIO
-    ATTACH;VALUE=URI:BELL
-    DESCRIPTION:${await testjson.message}
-    END:VALARM
-    END:VEVENT
-    END:VCALENDAR
-`;
   } else if (testjson.test_index == "test_jarayonda") {
     notest.classList.remove("hidden");
     examt.classList.remove("hidden");
@@ -266,13 +244,3 @@ async function soatlik_testlar(Admin_db) {
 }
 soatlik_testlar(Admin_db);
 
-// set alarm
-document.getElementById("downloadICS").addEventListener("click", function () {
-  // ICS fayl formati
-  const blob = new Blob([eventData], { type: "text/calendar" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "event.ics"; // ICS fayl nomi
-  a.click();
-});

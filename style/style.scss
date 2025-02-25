@@ -418,21 +418,45 @@ header {
     margin-bottom: 5rem;
 }
 .testlarimiz{
-    .cantainer{
+    .container{
+        margin: 0 1rem;
         background-image: url(../img/testkun.jpg);
         height: 45rem;
         background-repeat: no-repeat;
         background-position: center;
+        background-size: cover;
         position: relative;
-        .bg{
-            position: absolute;
-            
-            right: 0;
-            background: linear-gradient(transparent,black 30%);
-            height: 110rem;
-            width: 45rem;
-            transform: rotate(90deg);
+        border-radius: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5rem;
+        align-items: end;
+        h2{
+            font-family: "Poetsen One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 4rem;
+            margin-right: 5rem;
+            color: #fefefe;
+            z-index: 3;
+            text-align: right;
         }
+        a{
+            width: 35rem;
+            margin-right: 5rem;
+            height: 5rem;
+            z-index: 3;
+        }
+        .bg{
+            z-index: 2;
+            border-radius: 3rem;
+            position: absolute;
+            background: linear-gradient(270deg,#090404e0,transparent 150%);
+            height: 100%;
+            width: 100%;
+        }
+        
     }
 }
 #modal {
@@ -775,7 +799,29 @@ header {
             }
         }
     }
-
+.testlarimiz{
+    display: block;
+    .container{
+        h2{
+            font-family: "Poetsen One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 3rem;
+            margin-right: 2rem;
+            color: #fefefe;
+            z-index: 3;
+            text-align: right;
+        }
+        a{
+            width: 27rem;
+            font-size: 1.5rem;
+            margin-right: 2rem;
+            height: 4rem;
+            z-index: 3;
+        }
+        
+    }
+}
     header {
         .container {
             height: auto;
@@ -912,6 +958,7 @@ header {
     .profile > .container > h2 {
         font-size: 3rem;
     }
+
 }
 
 @media screen and (max-width: 480px) {

@@ -388,20 +388,44 @@ header .container img {
   margin-bottom: 5rem;
 }
 
-.testlarimiz .cantainer {
+.testlarimiz .container {
+  margin: 0 1rem;
   background-image: url(../img/testkun.jpg);
   height: 45rem;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   position: relative;
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5rem;
+  align-items: end;
 }
-.testlarimiz .cantainer .bg {
+.testlarimiz .container h2 {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+  margin-right: 5rem;
+  color: #fefefe;
+  z-index: 3;
+  text-align: right;
+}
+.testlarimiz .container a {
+  width: 35rem;
+  margin-right: 5rem;
+  height: 5rem;
+  z-index: 3;
+}
+.testlarimiz .container .bg {
+  z-index: 2;
+  border-radius: 3rem;
   position: absolute;
-  right: 0;
-  background: linear-gradient(transparent, black 30%);
-  height: 110rem;
-  width: 45rem;
-  transform: rotate(90deg);
+  background: linear-gradient(270deg, rgba(9, 4, 4, 0.8784313725), transparent 150%);
+  height: 100%;
+  width: 100%;
 }
 
 #modal {
@@ -951,6 +975,26 @@ header .container img {
     padding: 3px 20px;
     font-size: 1rem;
     margin-left: 4rem;
+  }
+  .testlarimiz {
+    display: block;
+  }
+  .testlarimiz .container h2 {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    margin-right: 2rem;
+    color: #fefefe;
+    z-index: 3;
+    text-align: right;
+  }
+  .testlarimiz .container a {
+    width: 27rem;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    height: 4rem;
+    z-index: 3;
   }
   header .container {
     height: auto;
