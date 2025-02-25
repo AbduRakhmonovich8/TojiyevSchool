@@ -6,12 +6,15 @@ const logined = document.querySelector(".logined");
 const kirish = document.querySelector(".kirish");
 
 document.querySelector(".logoutbtn").addEventListener("click", () => {
-  user = "";
-  tell = "";
-  date = "";
-  oquv_markaz = "";
-  kirish.classList.remove("hidden");
-  logined.classList.add("hidden");
+  if (confirm("Siz accauntingizdan chiqmoqchimisiz !")) {
+    user = "";
+    tell = "";
+    date = "";
+    oquv_markaz = "";
+    kirish.classList.remove("hidden");
+    logined.classList.add("hidden");
+    localStorage.clear();
+  }
 });
 function chizishUser(data) {
   let mal = data.data;
@@ -19,12 +22,35 @@ function chizishUser(data) {
     element.textContent = mal.name;
     logined.querySelector("#tellUser").textContent = "+998" + mal.tell;
     logined.querySelector("#indexUser").textContent =
-      "Obuna " +
-      new Date(mal.finishDate).toLocaleDateString("en-GB") +
-      " gacha to'lov amalga oshirilgan 👌";
+      "Obuna " + mal.finishDate + " gacha to'lov amalga oshirilgan 👌";
+
     logined.querySelector("#markazUser").textContent = mal.markaz;
+    let isActiveIndex = compareWithToday(mal.finishDate);
+    isActive(isActiveIndex);
   });
 }
+
+const compareWithToday = (dateStr) => {
+  // Hozirgi sanani olish
+  const today = new Date();
+  today.setDate(today.getDate() - 1);
+  const todayFormatted = `${String(today.getDate()).padStart(2, "0")}/${String(
+    today.getMonth() + 1
+  ).padStart(2, "0")}/${today.getFullYear()}`;
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split("/").map(Number);
+    return new Date(year, month - 1, day); // Oylar 0 dan boshlanadi
+  };
+  const todayDate = parseDate(todayFormatted);
+  const otherDate = parseDate(dateStr);
+
+  // Taqqoslash
+  if (todayDate < otherDate) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const modal = document.querySelector(".modal");
 let showMsg = modal.querySelector(".content");
@@ -92,6 +118,30 @@ async function hashPassword(password) {
     .join("");
   return hashHex;
 }
+///////////////////////////////////////Local storge
+async function localStorageGet() {
+  try {
+    let localicData = JSON.parse(localStorage["user"]);
+    data = {
+      phone: localicData.tell,
+      hashPassword: localicData.pass,
+    };
+    const responseAccess = await testData(data, "check", userUrl);
+    if (responseAccess.message == "network") {
+      showMsgFunk("Internetga ulanishda muammo !!!");
+    } else if (responseAccess.message == "Kirish Muvaffaqiyatli") {
+      showMsgFunk("Muovfaqiyatli ✅");
+      chizishUser(responseAccess);
+      kirish.querySelector("#login1").value = "";
+      kirish.querySelector("#password1").value = "";
+      kirish.classList.add("hidden");
+      logined.classList.remove("hidden");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+localStorageGet();
 // Test qilish
 input1.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -109,9 +159,11 @@ input1.addEventListener("click", async (e) => {
     } else if (responseAccess.message == "Kirish Muvaffaqiyatli") {
       showMsgFunk("Muovfaqiyatli ✅");
       chizishUser(responseAccess);
-      testDetalistChiz();
-      login1 = "";
-      pass1 = "";
+      let user = { tell: login1, pass: await hashPassword(pass1) };
+      localStorage.setItem("user", JSON.stringify(user));
+      kirish.querySelector("#login1").value = "";
+      kirish.querySelector("#password1").value = "";
+
       kirish.classList.add("hidden");
       logined.classList.remove("hidden");
     } else {
@@ -155,11 +207,13 @@ input2.addEventListener("click", async (e) => {
       showMsgFunk("Internetga ulanishda muammo !!!");
     } else if (responseAccess.status == "200") {
       showMsgFunk(responseAccess.message);
-      fam = "";
-      tell = "";
-      maktab = "";
-      password2 = "";
-      password22 = "";
+      kirish.querySelector("#fam").value = "";
+      kirish.querySelector("#date").value = "";
+      kirish.querySelector("#tell").value = "";
+      kirish.querySelector("#maktab").value = "";
+      kirish.querySelector("#password2").value = "";
+      kirish.querySelector("#password22").value = "";
+      onTogleRoyhat();
     } else {
       showMsgFunk(responseAccess.message);
     }
@@ -179,6 +233,7 @@ const Admin_db =
 
 async function testDataChose(sheetname = "", url) {
   let currentUrl = url + "?method=" + sheetname;
+
   try {
     // fetch chaqiruvi va javobni kutish
     const response = await fetch(currentUrl);
@@ -186,14 +241,21 @@ async function testDataChose(sheetname = "", url) {
     return await responseData; // data ni qaytarish
   } catch (error) {
     showMsgFunk("Tarmoq muammosi"); // xatolikni qaytarish
+    return error.message;
   }
 }
 
-async function testDetalistChiz() {
+async function checkactive() {
+  let numbers = await testDataChose("adminlar_tell", Admin_db);
+  let inner = "";
+  numbers.forEach((elem) => {
+    inner += `<a href="tel:+998${elem.tell}" target="_blank">Telifon orqali: ${elem.name} +998${elem.tell} </a>`;
+  });
+  document.querySelector("#numberic").innerHTML = inner;
+}
+async function testDetalistChiz(Admin_db) {
   const testlar_part = document.querySelector(".testlar>.container");
   let tests = await testDataChose("obunachi_testlari", Admin_db);
-  console.log(tests);
-
   let innertext = "<h3>Testlar</h3>";
   tests.forEach((data) => {
     innertext += `<div class="test">
@@ -208,39 +270,40 @@ async function testDetalistChiz() {
                     data.test_tuzilgan_sana
                   ).toLocaleDateString("en-GB")}
                 </p>
-                <button data-name="${
+                <button data-timic="1" data-name="${
                   data.testnomi
                 }" data-index="false" class="button passexsam" href="">Test ishlash</button>
       </div>
     `;
     testlar_part.innerHTML = innertext;
   });
-  buttonOnClick();
+  buttonOnClick()
 }
 
 // soatlik testlar
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-let icvfile = "";
-function convertToICalFormat(isoDate) {
-  return (
-    new Date(isoDate).toISOString().replace(/[-:.]/g, "").slice(0, 15) + "Z"
-  );
-}
-let eventData;
 async function soatlik_testlar(Admin_db) {
   const [testjson] = await testDataChose("soatlik_testlar", Admin_db);
-  console.log(testjson);
   const notest = document.querySelector(".notesTest");
   const h3t = notest.querySelector("h3");
   const examt = notest.querySelector("#passexsamt");
-  console.log(await testjson.messege);
   h3t.textContent = await testjson.messege;
   if (testjson.test_index == "test_bor") {
     notest.classList.remove("hidden");
   } else if (testjson.test_index == "test_jarayonda") {
+    logined.querySelector("#passexsamt").dataset.timic = testjson.chatId;
     notest.classList.remove("hidden");
     examt.classList.remove("hidden");
   }
 }
-soatlik_testlar(Admin_db);
 
+async function isActive(index) {
+  if (index) {
+    document.querySelector(".tolav").style.display = "none";
+    await testDetalistChiz(Admin_db);
+    await soatlik_testlar(Admin_db);
+  } else {
+    document.querySelector(".active").style.display = "none";
+    checkactive();
+  }
+}

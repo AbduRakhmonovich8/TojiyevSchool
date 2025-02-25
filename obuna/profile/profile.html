@@ -18,12 +18,12 @@
           <img src="./img/Screenshot 2025-01-23 005622.png" alt="logo" />
           <h2>Kirish</h2>   
           <div class="inputBox">
-            <input name="tell" id="login1" type="text" required />
+            <input name="tell" id="login1" autocomplete="current-password" type="text" required />
             <span>Ro'yhatga olinga telifon raqam</span>
             <i></i>
           </div>
           <div class="inputBox">
-            <input id="password1" name="password" type="password" required />
+            <input id="password1" name="password" autocomplete="current-password" type="password" required />
             <span>Kalitso'z</span>
             <i></i>
           </div>
@@ -54,19 +54,19 @@
             <i></i>
           </div>
           <div class="inputBox">
-            <input id="maktab" name="maktab" type="text" required />
+            <input id="maktab" name="maktab" type="text" autocomplete="current-password" required />
             <span>Maktab yoki o`quv markaz nomi</span>
             <i></i>
           </div>
 
           <div class="inputBox">
-            <input id="password2" name="password" type="password" required />
+            <input id="password2" name="password" autocomplete="current-password" type="password" required />
             <span>Kalitso'z</span>
             <i></i>
           </div>
 
           <div class="inputBox">
-            <input id="password22" name="password" type="password" required />
+            <input id="password22" name="password" autocomplete="current-password" type="password" required />
             <span>Kalitso'zni qayta kiriting !!!</span>
             <i></i>
           </div>
@@ -89,7 +89,7 @@
         </div>
       </nav>
 
-      <div style="" class="profile">
+      <div class="profile">
         <section class="scores">
           <div class="container">
             <img src="./img/47025187.jpg" alt="usr" />
@@ -100,31 +100,44 @@
               <span id="markazUser"></span>
             </div>
           </div>
-        </section>
-        <section class="timeTest">
+        </section>  
+        <div class="tolav">
           <div class="container">
-            <div class="card notesTest">
-              <h3></h3>
-              <button class="button hidden" id="downloadICS" >Eslatmalarimga qoshish</button>
-              <button class="button hidden passexsam" data-name="ommaviy" data-index="isHourly" id="passexsamt" >Testga ishlash</button>
+            <h2>To'lov summasi oyiga 10 ming so'm</h2>
+            <div id="numberic">
+              <!-- <a href="tel:+998903760897" target="_blank">Telifon orqali: +998903760897</a>
+              <a href="tel:+998903760897" target="_blank">Telifon orqali: +998903760897</a>
+              <a href="tel:+998903760897" target="_blank">Telifon orqali: +998903760897</a> -->
             </div>
+            <p>yoki o'quv markazni o'zida o'qituvchilarimiz orqali amalga oshirishingiz mumkin !</p>
+            <p>Hurmat bilan TojiyevSchool jamoasi !</p>
           </div>
-        </section>
-        <section class="testlar">
-          <div class="container">
-            <h3>Testlar</h3>  
-            <!-- <div class="test">
-              <h3 class="test-title">Bu test ildizlar mavzusidan</h3>
-              <p class="test-content">
-                Foydalanilgan kitoblar: Oq toplam, Test master, 9-sinf darslik
-                <br />
-                Test tuzuvchilar: G'aniyev Sh., Tojiyev Sh., Tojiyev M. <br />
-                Test tuzilgan sana: 01/01/2025
-              </p>
-              <button data-name="ommaviy" data-index="isHourly" class="button passexsam" href="">Test ishlash</button>
-            </div> -->
-          </div>
-        </section>
+        </div>
+        <div class="active">
+          <section class="timeTest">
+            <div class="container">
+              <div class="card notesTest">
+                <h3></h3>
+                <button class="button hidden" data-timic="1" data-name="ommaviy" data-index="isHourly" id="passexsamt" >Testga ishlash</button>
+              </div>
+            </div>
+          </section>
+          <section class="testlar">
+            <div class="container">
+              <h3>Testlar</h3>  
+              <!-- <div class="test">
+                <h3 class="test-title">Bu test ildizlar mavzusidan</h3>
+                <p class="test-content">
+                  Foydalanilgan kitoblar: Oq toplam, Test master, 9-sinf darslik
+                  <br />
+                  Test tuzuvchilar: G'aniyev Sh., Tojiyev Sh., Tojiyev M. <br />
+                  Test tuzilgan sana: 01/01/2025
+                </p>
+                <button data-name="ommaviy" data-index="isHourly" class="button passexsam" href="">Test ishlash</button>
+              </div> -->
+            </div>
+          </section>
+        </div>
       </div>
       <div class="exam hidden">
         <div class="container">

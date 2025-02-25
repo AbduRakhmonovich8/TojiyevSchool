@@ -196,6 +196,26 @@ nav p {
   margin: 4rem 0;
 }
 
+.tolav .container {
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 3rem;
+}
+.tolav .container div {
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.tolav .container h2 {
+  font-size: 2.5rem;
+}
+.tolav .container a, .tolav .container p {
+  font-size: 2rem;
+}
+
 @media screen and (max-width: 800px) {
   html {
     font-size: 9px;

@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
 let docKurs = document.querySelector("#kurslar")
 async function chizKurs(url) {
     let incData = await testDataChose("kurslar_kunlari",settingURL)
-    console.log(incData);
     let innerText
         for (let element of incData) {
             let kun1 = [element.kun1, element.kun2, element.kun3, element.kun4, element.kun5, element.kun6, element.kun7]

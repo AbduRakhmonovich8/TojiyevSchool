@@ -1,5 +1,8 @@
 let testDataUrl = `https://script.google.com/macros/s/AKfycbyQ39u4l7Iscnouu1tPyCGh1dAWWwhI4b35OT4210vpNKeUfbBCjBOH8p4ajepdVlz_/exec`;
-let passexsam
+let passexsam;
+let currentUserName = document.querySelector("#nameUser");
+let currentUserPhone = document.querySelector("#tellUser");
+let areTimic = false;
 function showMsgFunk(msg = "yuklanmoqda...", visiblity = true) {
   modal.classList.remove("hidden");
   showMsg.textContent = msg;
@@ -24,13 +27,13 @@ async function testDatafortest(sheetname = "", data = "", option = "get", url) {
   }
   try {
     // fetch chaqiruvi va javobni kutish
-    showMsgFunk(undefined,false)
+    showMsgFunk(undefined, false);
     const response = await fetch(currentUrl);
     const responseData = await response.json(); // javobni JSON formatda olish
-    showMsgFunk()
+    showMsgFunk();
     return await responseData; // data ni qaytarish
   } catch (error) {
-    showMsgFunk("Tarmoq muammosi",false); // xatolikni qaytarish
+    showMsgFunk("Tarmoq muammosi", false); // xatolikni qaytarish
   }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////1
@@ -63,12 +66,73 @@ function submitAnswers(e) {
 
     // Natijani chiqarish
     form.innerHTML = `<h3>You got ${score} out of ${total}</h3>`;
+    if (areTimic) {
+      areTimic = false;
+      let content = `Name: ${currentUserName.textContent} Phone: ${
+        currentUserPhone.textContent
+      } ${score} of ${total} tests. Test name: ${passexsam}. Time: Date: ${new Date()} `;
+      telegram(content);
+      data = {
+        date: `${new Date()}`,
+        name: currentUserName.textContent,
+        tell: currentUserPhone.textContent,
+        result: `${score} of ${total} tests`,
+        testname: passexsam,
+      };
+      sentCompitation(data);
+    }
   } catch (error) {
     console.log(error);
   }
 }
+
+// telegram link
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+async function sentCompitation(data) {
+  let timeUrl =
+    "https://script.google.com/macros/s/AKfycbxe4rKKKkCG_OXuNqe4L-uLHQ1cyWH2zGM7D5RCFaJSAkkB2O1P5ZaA6TQXmiu6hVkF1w/exec";
+  let currentUrl = "";
+  currentUrl = `${timeUrl}?data=${JSON.stringify(data)}`;
+  try {
+    // fetch chaqiruvi va javobni kutish
+    showMsgFunk(undefined, false);
+    const response = await fetch(currentUrl);
+    const responseData = await response.json(); // javobni JSON formatda olish
+    showMsgFunk("Muavfaqiyatli...");
+    return await responseData; // data ni qaytarish
+  } catch (error) {
+    showMsgFunk("Tarmoq muammosi", false); // xatolikni qaytarish
+    console.error(error);
+  }
+}
+function telegram(telegramMessage) {
+  var telegramChatId = document.querySelector("#passexsamt").dataset.timic; //"5672285896";
+  // Telegram botiga xabar yuborish
+  var telegramToken = "6799581106:AAEld8Tgt4c1DUmg9UNaICjNZDkr6NiQ-GU";
+  var telegramUrl = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
+  fetch(telegramUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chat_id: telegramChatId,
+      text: telegramMessage,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return 0
+    })
+    .catch((error) => {
+      console.log("no internet connaction ," + error);
+    });
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // test yasash uchun ishlatiladi
-async function makeForm(url,sheetname) {
+async function makeForm(url, sheetname) {
   let hedermal = {
     question: "question",
     aj: "aj",
@@ -109,17 +173,28 @@ async function makeForm(url,sheetname) {
 
 // working siyt
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-function buttonOnClick(){
+function buttonOnClick() {
   document.querySelectorAll(".passexsam").forEach((elem) => {
     elem.addEventListener("click", (e) => {
       e.preventDefault();
-      passexsam = e.target.dataset.name  
-      showMsgFunk(undefined,false)
-      makeForm(testDataUrl,passexsam);
+      passexsam = e.target.dataset.name;
+      showMsgFunk(undefined, false);
+      makeForm(testDataUrl, passexsam);
       document.querySelector(".profile").classList.add("hidden");
       document.querySelector(".exam").classList.remove("hidden");
     });
   });
 }
+document.querySelectorAll("#passexsamt").forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    e.preventDefault();
+    areTimic = true;
+    passexsam = e.target.dataset.name;
+    showMsgFunk(undefined, false);
+    makeForm(testDataUrl, passexsam);
+    document.querySelector(".profile").classList.add("hidden");
+    document.querySelector(".exam").classList.remove("hidden");
+  });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////

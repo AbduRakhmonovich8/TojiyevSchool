@@ -388,15 +388,16 @@ header .container img {
   margin-bottom: 5rem;
 }
 
-.testlarimiz .container {
-  margin: 0 1rem;
+.testlarimiz {
   background-image: url(../img/testkun.jpg);
-  height: 45rem;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   position: relative;
-  border-radius: 3rem;
+}
+.testlarimiz .container {
+  margin: auto;
+  height: 45rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -420,8 +421,8 @@ header .container img {
   z-index: 3;
 }
 .testlarimiz .container .bg {
+  left: 0;
   z-index: 2;
-  border-radius: 3rem;
   position: absolute;
   background: linear-gradient(270deg, rgba(9, 4, 4, 0.8784313725), transparent 150%);
   height: 100%;
