@@ -243,21 +243,21 @@ async function soatlik_testlar(Admin_db) {
   } else if (testjson.test_index == "test_jarayonda") {
     notest.classList.remove("hidden");
     examt.classList.remove("hidden");
-    icvfile = await `
+    eventData = await `
       BEGIN:VCALENDAR
       VERSION:2.0
       PRODID:-//MyApp//NONSGML v1.0//EN
       BEGIN:VEVENT
-      DTSTAMP:${testjson.test_vaqti_kuni}
-      DTSTART:${testjson.test_vaqti_kuni}
-      DTEND:${testjson.tugash_vaqti}
-      SUMMARY:${testjson.message}
-      DESCRIPTION:${testjson.message} 
+      DTSTAMP:${await testjson.test_vaqti_kuni}
+      DTSTART:${await testjson.test_vaqti_kuni}
+      DTEND:${await testjson.tugash_vaqti}
+      SUMMARY:${await testjson.message}
+      DESCRIPTION:${await testjson.message} 
       BEGIN:VALARM
       TRIGGER:-PT10M
       ACTION:AUDIO
       ATTACH;VALUE=URI:BELL
-      DESCRIPTION:${testjson.message}
+      DESCRIPTION:${await testjson.message}
       END:VALARM
       END:VEVENT
       END:VCALENDAR
