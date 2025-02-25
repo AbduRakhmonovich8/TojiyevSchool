@@ -226,7 +226,7 @@ function convertToICalFormat(isoDate) {
     new Date(isoDate).toISOString().replace(/[-:.]/g, "").slice(0, 15) + "Z"
   );
 }
-let eventData = {};
+let eventData;
 async function soatlik_testlar(Admin_db) {
   const [testjson] = await testDataChose("soatlik_testlar", Admin_db);
   console.log(testjson);
@@ -240,28 +240,28 @@ async function soatlik_testlar(Admin_db) {
   if (testjson.test_index == "test_bor") {
     notest.classList.remove("hidden");
     icst.classList.remove("hidden");
+    eventData = await `
+    BEGIN:VCALENDAR
+    VERSION:2.0
+    PRODID:-//MyApp//NONSGML v1.0//EN
+    BEGIN:VEVENT
+    DTSTAMP:${await testjson.test_vaqti_kuni}
+    DTSTART:${await testjson.test_vaqti_kuni}
+    DTEND:${await testjson.tugash_vaqti}
+    SUMMARY:${await testjson.message}
+    DESCRIPTION:${await testjson.message} 
+    BEGIN:VALARM
+    TRIGGER:-PT10M
+    ACTION:AUDIO
+    ATTACH;VALUE=URI:BELL
+    DESCRIPTION:${await testjson.message}
+    END:VALARM
+    END:VEVENT
+    END:VCALENDAR
+`;
   } else if (testjson.test_index == "test_jarayonda") {
     notest.classList.remove("hidden");
     examt.classList.remove("hidden");
-    eventData = await `
-      BEGIN:VCALENDAR
-      VERSION:2.0
-      PRODID:-//MyApp//NONSGML v1.0//EN
-      BEGIN:VEVENT
-      DTSTAMP:${await testjson.test_vaqti_kuni}
-      DTSTART:${await testjson.test_vaqti_kuni}
-      DTEND:${await testjson.tugash_vaqti}
-      SUMMARY:${await testjson.message}
-      DESCRIPTION:${await testjson.message} 
-      BEGIN:VALARM
-      TRIGGER:-PT10M
-      ACTION:AUDIO
-      ATTACH;VALUE=URI:BELL
-      DESCRIPTION:${await testjson.message}
-      END:VALARM
-      END:VEVENT
-      END:VCALENDAR
-`;
   }
 }
 soatlik_testlar(Admin_db);
