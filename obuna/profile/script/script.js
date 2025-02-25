@@ -192,6 +192,8 @@ async function testDataChose(sheetname = "", url) {
 async function testDetalistChiz() {
   const testlar_part = document.querySelector(".testlar>.container");
   let tests = await testDataChose("obunachi_testlari", Admin_db);
+  console.log(tests);
+
   let innertext = "<h3>Testlar</h3>";
   tests.forEach((data) => {
     innertext += `<div class="test">
@@ -224,6 +226,7 @@ function convertToICalFormat(isoDate) {
     new Date(isoDate).toISOString().replace(/[-:.]/g, "").slice(0, 15) + "Z"
   );
 }
+let eventData = {};
 async function soatlik_testlar(Admin_db) {
   const [testjson] = await testDataChose("soatlik_testlar", Admin_db);
   console.log(testjson);
@@ -240,18 +243,25 @@ async function soatlik_testlar(Admin_db) {
   } else if (testjson.test_index == "test_jarayonda") {
     notest.classList.remove("hidden");
     examt.classList.remove("hidden");
-    icvfile = `
+    icvfile = await `
       BEGIN:VCALENDAR
       VERSION:2.0
       PRODID:-//MyApp//NONSGML v1.0//EN
       BEGIN:VEVENT
-      DTSTAMP:20250210T120000Z
-      DTSTART:20250215T140000Z
-      DTEND:20250215T150000Z
-      SUMMARY:My Test Event
-      DESCRIPTION:Bu test tadbiri
+      DTSTAMP:${testjson.test_vaqti_kuni}
+      DTSTART:${testjson.test_vaqti_kuni}
+      DTEND:${testjson.tugash_vaqti}
+      SUMMARY:${testjson.message}
+      DESCRIPTION:${testjson.message} 
+      BEGIN:VALARM
+      TRIGGER:-PT10M
+      ACTION:AUDIO
+      ATTACH;VALUE=URI:BELL
+      DESCRIPTION:${testjson.message}
+      END:VALARM
       END:VEVENT
-      END:VCALENDAR`;
+      END:VCALENDAR
+`;
   }
 }
 soatlik_testlar(Admin_db);
@@ -259,21 +269,6 @@ soatlik_testlar(Admin_db);
 // set alarm
 document.getElementById("downloadICS").addEventListener("click", function () {
   // ICS fayl formati
-  const eventData = `
-BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//MyApp//NONSGML v1.0//EN
-BEGIN:VEVENT
-UID:12345@example.com
-DTSTAMP:20250210T120000Z
-DTSTART:20250215T140000Z
-DTEND:20250215T150000Z
-SUMMARY:My Test Event
-DESCRIPTION:Bu test tadbiri
-LOCATION:Toshkent, Uzbekistan
-END:VEVENT
-END:VCALENDAR`;
-
   const blob = new Blob([eventData], { type: "text/calendar" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
