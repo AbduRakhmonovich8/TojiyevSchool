@@ -1,4 +1,4 @@
-let testDataUrl = `https://script.google.com/macros/s/AKfycbyQ39u4l7Iscnouu1tPyCGh1dAWWwhI4b35OT4210vpNKeUfbBCjBOH8p4ajepdVlz_/exec`;
+let testDataUrl = `https://script.google.com/macros/s/AKfycbxo6R-oSlL3z7VtjrvGrmdqJAfCIRkHAqZEZm4N88Ob1_oMyOiHXlGrPrLNuW1hIPz2/exec`;
 let passexsam;
 let currentUserName = document.querySelector("#nameUser");
 let currentUserPhone = document.querySelector("#tellUser");
@@ -36,8 +36,8 @@ async function testDatafortest(sheetname = "", data = "", option = "get", url) {
     showMsgFunk("Tarmoq muammosi", false); // xatolikni qaytarish
   }
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////1
-//https://script.google.com/macros/s/AKfycbwIQ-lfYoT0Evqtsmnv1lKsm5yDLligMGql8-Fi1lX8XRSREI9Suos_960W6C_Ls8Pk/exec?action=check&data={"phone":"944646412","hashPassword":"f215ad9f632cb9b55c3dc2b61c47942b10feb5f1cdb2aafd73b8c569aa17cb88"}
+
+
 
 // test bilan bogliq
 ////////////////////////////////////////////////////////////////////////////////////////////////////

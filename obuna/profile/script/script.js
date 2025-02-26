@@ -229,7 +229,7 @@ input2.addEventListener("click", async (e) => {
 // TestDetalies
 ////////////////////////////////////////////////////////////////////////////////
 const Admin_db =
-  "https://script.google.com/macros/s/AKfycbwvm-mkisnpuZRhlKB289cnsLVXje62_qmQ6sl960d6sDdvSr2xd4u1x4-wXJuLo8st/exec"; // test.db
+  "https://script.google.com/macros/s/AKfycbwvm-mkisnpuZRhlKB289cnsLVXje62_qmQ6sl960d6sDdvSr2xd4u1x4-wXJuLo8st/exec"; 
 
 async function testDataChose(sheetname = "", url) {
   let currentUrl = url + "?method=" + sheetname;
