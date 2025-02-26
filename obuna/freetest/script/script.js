@@ -1,4 +1,4 @@
-let testDataUrl = `https://script.google.com/macros/s/AKfycbyQ39u4l7Iscnouu1tPyCGh1dAWWwhI4b35OT4210vpNKeUfbBCjBOH8p4ajepdVlz_/exec`;
+let testDataUrl = `https://script.google.com/macros/s/AKfycbxo6R-oSlL3z7VtjrvGrmdqJAfCIRkHAqZEZm4N88Ob1_oMyOiHXlGrPrLNuW1hIPz2/exec`;
 const modal = document.querySelector(".modal");
 const showMsg = modal.querySelector("p");
 function showMsgFunk(msg = "yuklanmoqda...", visiblity = true) {
@@ -41,6 +41,11 @@ async function testDatafortest(sheetname = "", data = "", option = "get", url) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 let answare1; // To'g'ri javoblarni shu arrayda saqlaymiz
 const form = document.forms["quizForm"];
+
+function replice(text) {
+  while (text.includes("qoshuv")) text = text.replace("qoshuv", "+");
+  return text;
+}
 
 function submitAnswers(e) {
   e.preventDefault();
@@ -89,7 +94,7 @@ async function makeForm(url) {
   await jsonFile.sort(() => Math.random() - 0.5);
   await jsonFile.forEach((elem, index) => {
     innertext += `
-                      <h3>${index + 1}. ${elem.question}</h3>
+                      <h3>${index + 1}. ${replice(elem.question)}</h3>
                     <input type="radio" name="q${index + 1}" value="a" id="q${
       index + 1
     }a" /> a. ${elem.aj}<br />

@@ -123,14 +123,17 @@ function telegram(telegramMessage) {
   })
     .then((response) => response.json())
     .then((data) => {
-      return 0
+      return 0;
     })
     .catch((error) => {
       console.log("no internet connaction ," + error);
     });
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+function replice(text) {
+  while (text.includes("qoshuv")) text = text.replace("qoshuv", "+");
+  return text;
+}
 // test yasash uchun ishlatiladi
 async function makeForm(url, sheetname) {
   let hedermal = {
@@ -149,7 +152,7 @@ async function makeForm(url, sheetname) {
   await jsonFile.sort(() => Math.random() - 0.5);
   await jsonFile.forEach((elem, index) => {
     innertext += `
-                      <h3>${index + 1}. ${elem.question}</h3>
+                      <h3>${index + 1}. ${replice(elem.question)}</h3>
                     <input type="radio" name="q${index + 1}" value="a" id="q${
       index + 1
     }a" /> a. ${elem.aj}<br />
