@@ -22,10 +22,10 @@ function chizishUser(data) {
     element.textContent = mal.name;
     logined.querySelector("#tellUser").textContent = "+998" + mal.tell;
     logined.querySelector("#indexUser").textContent =
-      "Obuna " + mal.finishDate + " gacha to'lov amalga oshirilgan 👌";
+      "Obuna " + new Date(mal.finishDate).toLocaleDateString("en-US") + " gacha to'lov amalga oshirilgan 👌";
 
     logined.querySelector("#markazUser").textContent = mal.markaz;
-    let isActiveIndex = compareWithToday(mal.finishDate);
+    let isActiveIndex = compareWithToday(new Date(mal.finishDate).toLocaleDateString("en-US"));
     isActive(isActiveIndex);
   });
 }
@@ -51,7 +51,6 @@ const compareWithToday = (dateStr) => {
     return false;
   }
 };
-
 const modal = document.querySelector(".modal");
 let showMsg = modal.querySelector(".content");
 function showMsgFunk(msg = "yuklanmoqda...") {
